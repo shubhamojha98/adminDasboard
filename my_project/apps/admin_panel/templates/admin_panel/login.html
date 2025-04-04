@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}" />
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Admin Panel Header (Outside of Login Box) -->
+    <div class="admin-header">
+      <h2>Admin Panel</h2>
+    </div>
+
+    <div class="login-container">
+      <div class="login-box">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="{% static 'assets/gif/login.gif' %}" alt="Logo" />
+        </div>
+        <div class="logo">
+          <img src="{% static 'assets/gif/login_1.gif' %}" alt="Logo" />
+        </div>
+        <div class="logo">
+          <img src="{% static 'assets/gif/login_2.gif' %}" alt="Logo" />
+        </div>
+
+        <!-- Sign-in Message -->
+        <div class="signin-message">
+          <h5 style="margin-top: 2px;  margin-bottom: 40px;">Sign in to Continue...</h5>
+          {% comment %} {% if error %}
+              <h5 style="margin-top: 2px;  margin-bottom: 40px; color: red;">{{ error }}</h5>
+          {% endif %} {% endcomment %}
+          {% if messages %}
+        {% for message in messages %}
+            <h5 style="margin-top: 2px;  margin-bottom: 40px; color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h5>
+        {% endfor %}
+{% endif %}
+        </div>
+
+        <!-- Login Form -->
+        <form method="POST">
+          {% csrf_token %}
+
+          <input type="hidden" class="form-control" name="latitude" id="latitude" value="">
+          <input type="hidden" class="form-control" name="longitude" id="longitude" value="">          
+          <!-- Username -->
+          <div class="input-group">
+            <label for="username">Username</label>
+            <div class="input-icon">
+              <i class="fas fa-user"></i>
+              <input type="text" id="username" name="username" value="{{ request.COOKIES.username|default_if_none:'' }}" placeholder="Username" required />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="input-group">
+            <label for="password">Password</label>
+            <div class="input-icon">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" name="password"  value="{{ request.COOKIES.password|default_if_none:'' }}" placeholder="Password" required />
+              <span class="toggle-password" onclick="togglePasswordVisibility()">{% comment %} <i class="fas fa-eye"></i> {% endcomment %}</span>
+            </div>
+          </div>
+
+          <!-- Remember Me Checkbox -->
+          <div class="remember-me">
+            <input type="checkbox" id="rememberme" name="rememberme"  {% if request.COOKIES.username %} checked {% endif %} />
+            <label for="rememberme">Remember Me</label>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password')
+        const toggleIcon = document.querySelector('.toggle-password i')
+      
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text'
+          toggleIcon.classList.remove('fa-eye')
+          toggleIcon.classList.add('fa-eye-slash')
+        } else {
+          passwordInput.type = 'password'
+          toggleIcon.classList.remove('fa-eye-slash')
+          toggleIcon.classList.add('fa-eye')
+        }
+      }
+
+      //lat long code
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            document.getElementById("latitude").value = position.coords.latitude;
+            document.getElementById("longitude").value = position.coords.longitude;
+        }, function(error) {
+            console.error("Error getting location: ", error);
+        });
+    } else {
+        console.warn("Geolocation is not supported by this browser.");
+    }
+
+
+    </script>
+  </body>
+</html>

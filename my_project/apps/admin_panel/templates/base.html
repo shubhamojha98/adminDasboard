@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    {% include "includes/header.html" %}
+
+    <div class="content">
+      {% block content %}
+  
+      {% endblock %}
+    </div>
+    {% include "includes/footer.html" %}
+   
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+  </body>
+</html>

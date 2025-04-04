@@ -1,0 +1,427 @@
+
+
+{% load static %}
+
+
+
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="dark" data-sidebar="dark" data-layout-mode="<?php echo $currentLayout; ?>" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="enable">
+
+<head>
+
+	<meta charset="utf-8" />
+	<title>{{SITE_TITLE}}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="pay property tax online, pay property tax online in patna, property tax patna, holding tax patna, patna Municipal System,
+	how to pay property tax online in patna municipal ,how to pay property tax online, PATNA MUNICIPAL">
+	<meta content="Admin Panel" name="description" />
+
+	<!-- Sweet Alert css-->
+	
+	<link href="{% static 'assets/libs/sweetalert2/sweetalert2.min.css' %}" rel="stylesheet" type="text/css">
+
+
+	<!-- Layout config Js -->
+	
+	<script src="{% static 'assets/js/layout.js' %}"></script>
+	
+	 <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<!-- Bootstrap Css -->
+	
+	<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+	<!-- Icons Css -->
+	
+	<link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+	<!-- App Css -->
+	<link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+	<!-- Custom Css -->
+	<link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" type="text/css" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+	<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+
+	<style>
+		select.error {
+			background-color: #ffa8a8;
+			border: 1px dotted red;
+			margin-bottom: 0px;
+		}
+
+
+		input.error {
+			background-color: #ffa8a8;
+			border: 1px dotted red;
+			margin-bottom: 0px;
+		}
+	</style>
+</head>
+
+
+<body>
+	<noscript>
+		<h1>
+			<center><span style="color:#FF0000">Please enable javascript on your browser</span></center>
+		</h1>
+	</noscript>
+	<!-- Begin page -->
+	<div id="layout-wrapper">
+
+		<header id="page-topbar">
+			<div class="layout-width">
+				<div class="navbar-header">
+					<div class="d-flex">
+						<!-- LOGO Upper -->
+						<div class="navbar-brand-box horizontal-logo">
+							{% comment %} <a href="<?= base_url() ?>adminDashboard" class="logo logo-dark"> {% endcomment %}
+								<span class="logo-sm">
+									{% comment %} <img src="<?php echo base_url() . $this->config->item('logo'); ?>" alt="" height="22"> {% endcomment %}
+								</span>
+								<span class="logo-lg">
+								User Type
+								</span>
+							</a>
+
+							{% comment %} <a href="<?= base_url() ?>adminDashboard" class="logo logo-light"> {% endcomment %}
+								<span class="logo-sm">
+									{% comment %} <img src="<?php echo base_url() . $this->config->item('logo'); ?>" alt="" height="22"> {% endcomment %}
+								</span>
+								<span class="logo-lg" style="font-size:19px;font-weight:bold;color:#FFFFFF">
+									User Type
+								</span>
+							</a>
+						</div>
+
+						<button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
+							<span class="hamburger-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						</button>
+
+						<!-- App Search-->
+						<!--Redirect of Search Page for open-->
+						<div class="position-relative">
+							<input type="text" class="form-control" name="dashSearch" id="dashSearch" placeholder="Data Search" autocomplete="off" value="<?php echo $this->session->userdata("searchData"); ?>">
+							<span class="mdi mdi-magnify search-widget-icon"></span>
+							<span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
+						</div>
+						<!--Form Close-->
+					</div>
+
+					<div class="d-flex align-items-center">
+						<div class="ms-2">
+							<!--Change of Ulb form open-->
+							<select class="form-select rounded-pill" aria-label="Default select example" name="changeCurrentUlb" onChange="this.form.submit()">
+							<!--logic for multiple ulb if existis-->
+								op
+							</select>
+							<!--Form Close-->
+
+						</div>
+					</div>
+					<div class="d-flex align-items-center">
+
+						<div class="dropdown d-md-none topbar-head-dropdown header-item">
+							<button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="bx bx-search fs-22"></i>
+							</button>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
+								<form class="p-3">
+									<div class="form-group m-0">
+										<div class="input-group">
+											{% comment %} <input type="text" class="form-control" name="dashSearch" id="dashSearch" placeholder="Data Search" autocomplete="off" value="<?php echo $this->session->userdata("searchData"); ?>"> {% endcomment %}
+											<button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<!--Fullscreen-->
+						<div class="ms-1 header-item d-none d-sm-flex">
+
+							<button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-toggle="fullscreen">
+								<i class='bx bx-fullscreen fs-22'></i>
+							</button>
+						</div>
+
+						<!--DarkMode-->
+						<div class="ms-1 header-item d-none d-sm-flex">
+							{% comment %} <?php echo form_open('adminDashboard/changeLayout') ?> {% endcomment %}
+							<input type="hidden" name="currentLayoutMode" id="currentLayoutMode" value="<?php echo $currentLayout; ?>" />
+							<button type="submit" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode">
+								<i class='bx bx-moon fs-22'></i>
+							</button>
+							{% comment %} <?php echo form_close(); ?> {% endcomment %}
+						</div>
+
+						<!--User Details-->
+						{% comment %} <?php
+						$default_img = base_url() . "assets/images/defaultUser.jpg";
+						if ($this->session->userdata('USER_REC')['empimage'] != "") {
+							$default_img = base_url() . "uploads/" . $this->session->userdata('USER_REC')['empimage'];
+						}
+
+						?> {% endcomment %}
+
+						<div class="dropdown ms-sm-3 header-item topbar-user">
+							<button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="d-flex align-items-center">
+									<img class="rounded-circle header-profile-user" src="<?php echo $default_img . '?' . time(); ?>" alt="Header Avatar">
+									{% comment %} <span class="text-start ms-xl-2">
+										<span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"><?php echo $this->session->userdata('USER_REC')['empfirstname']; ?></span>
+										<span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"><?php echo $this->session->userdata('USER_REC')['empcode']; ?></span>
+									</span> {% endcomment %}
+								</span>
+							</button>
+							<div class="dropdown-menu dropdown-menu-end">
+
+
+								{% comment %} <a class="dropdown-item" href="<?= base_url() ?>auth/profileInfo"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+								<a class="dropdown-item" href="<?= base_url() ?>auth/logout"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+								<a class="dropdown-item" href="<?= base_url() ?>auth/switchUser"><i class="mdi mdi-account-switch text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Switch User</span></a> {% endcomment %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<!-- removeNotificationModal -->
+		<div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="NotificationModalbtn-close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mt-2 text-center">
+
+							<div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+								<h4>Are you sure ?</h4>
+								<p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
+							</div>
+						</div>
+						<div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+							<button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn w-sm btn-danger" id="delete-notification">Yes, Delete It!</button>
+						</div>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<!-- ========== App Menu ========== -->
+		<div class="app-menu navbar-menu">
+			<!-- LOGO -->
+			<div class="navbar-brand-box">
+				<!-- Dark Logo-->
+				<a href="#" class="logo logo-dark">
+					<span class="logo-sm">
+						{% comment %} <img src="<?php echo base_url() . $this->config->item('logo'); ?>" alt="" height="22"> {% endcomment %}
+					</span>
+					<span class="logo-lg" style="font-size:19px;font-weight:bold;">
+						{% comment %} <?php echo $this->session->userdata('USER_REC')['user_type']; ?> {% endcomment %}
+					</span>
+				</a>
+
+
+
+				<!-- Light Logo-->
+				<a href="#" class="logo logo-light">
+					<span class="logo-sm">
+						{% comment %} <img src="<?php echo base_url() . $this->config->item('logo'); ?>" alt="" height="22"> {% endcomment %}
+					</span>
+					<span class="logo-lg" style="font-size:19px;font-weight:bold;color:#FFFFFF">
+						{% comment %} <?php echo $this->session->userdata('USER_REC')['user_type']; ?> {% endcomment %}
+					</span>
+				</a>
+				<button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+					<i class="ri-record-circle-line"></i> </button>
+			</div>
+
+			<div id="scrollbar">
+				<div class="container-fluid">
+
+					<div id="two-column-menu"></div>
+					{% comment %} <ul class="navbar-nav" id="navbar-nav">
+						<li class="menu-title"><span data-key="t-menu">MENU</span></li>
+						<?php if ($this->session->userdata('USER_REC')['usertypeid'] <> 7) { ?>
+							<li class="nav-item" id="menu-DASHBOARD">
+								<a class="nav-link menu-link" href="<?php echo base_url(); ?>adminDashboard" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+									<i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">DASHBOARD</span>
+								</a>
+							</li>
+						<?php } else { ?>
+							<li class="nav-item" id="menu-DASHBOARD">
+								<a class="nav-link menu-link" href="<?php echo base_url(); ?>webDashboard" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+									<i data-feather="home" class="icon-dual"></i> <span data-key="t-dashboards">DASHBOARD</span>
+								</a>
+							</li>
+
+						<?php } ?>
+
+
+
+
+
+						<?php
+						function search($array, $key, $value)
+						{
+							$results = array();
+
+							// if it is array 
+							if (is_array($array)) {
+
+								// if array has required key and value 
+								// matched store result  
+								if (isset($array[$key]) && $array[$key] == $value) {
+									$results[$key] = $array[$key];
+								}
+
+								// Iterate for each element in array 
+								foreach ($array as $subarray) {
+
+									// recur through each element and append result  
+									$results = array_merge(
+										$results,
+										search($subarray, $key, $value)
+									);
+								}
+							}
+
+							return $results;
+						}
+
+
+						$menu_arrayP = $this->session->userdata('menu_arrayP');
+						$menu_arrayS = $this->session->userdata('menu_arrayS');
+						$menu_arraySC = $this->session->userdata('menu_arraySC');
+						$menu_new_tag = $this->session->userdata('menu_new_tag');
+						//var_dump($menu_arrayS);
+						//print_r($menu_arraySC);
+						if (is_array($menu_arrayP) && is_array($menu_arrayS) && is_array($menu_arraySC)) {
+							for ($i = 0; $i < sizeof($menu_arrayP); $i++) {
+								$attchParent = '<span class="badge bg-soft-success text-success mt-1 float-end">New</span>&nbsp;&nbsp;&nbsp;';
+								/*if(empty($menu_arrayP[$i]["newmenutag"])){
+									$attchParent='';
+								}*/
+								if (!in_array($menu_arrayP[$i]["pk_id"], $menu_new_tag)) {
+									$attchParent = '';
+								}
+
+								//Check Parent Menu Has Child Menu
+								//Parent Menu Has Child Menu
+								$checkSubMenu = search($menu_arrayS, 'parentmenuid', $menu_arrayP[$i]["pk_id"]);
+								if (!empty($checkSubMenu)) {
+									echo '<li class="nav-item">
+										<a class="nav-link menu-link collapsed" href="#sidebarApps_' . $i . '" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarApps">
+											<i data-feather="' . $menu_arrayP[$i]["menufavicon"] . '" class="icon-dual"></i> <span data-key="t-apps">' . $menu_arrayP[$i]["menuname"] . '</span>
+											' . $attchParent . '
+										 </a>
+										
+											<div class="menu-dropdown collapse" id="sidebarApps_' . $i . '">
+												<ul class="nav nav-sm flex-column">';
+									if (isset($menu_arrayS[$i]) && count($menu_arrayS[$i]) > 0) {
+										for ($j = 1; $j <= count($menu_arrayS[$i]); $j++) {
+
+											$mid["mid"] = $menu_arrayS[$i][$j]["pk_id"];
+
+											if ($menu_arrayS[$i][$j]["controller"] != '' && $menu_arrayS[$i][$j]["actionfunction"] != '') {
+												$url_para_s = $menu_arrayS[$i][$j]['controller'] . '/' . $menu_arrayS[$i][$j]['actionfunction'];
+												if ($menu_arrayS[$i][$j]["urlstring"] != '')
+													$url_para_s .= '/' . $menu_arrayS[$i][$j]["urlstring"];
+												$url_s = site_url($url_para_s);
+											} else
+												$url_s = '#';
+
+
+
+											$attchChild = '<span class="badge bg-soft-success text-success mt-1 float-end">New</span>&nbsp;&nbsp;&nbsp;';
+											if (!in_array($menu_arrayS[$i][$j]["pk_id"], $menu_new_tag)) {
+												$attchChild = '';
+											}
+
+											$checkSubChildMenu = search($menu_arraySC, 'parentmenuid', $menu_arrayS[$i][$j]["pk_id"]);
+
+											if (empty($checkSubChildMenu)) {
+												$menu_id = str_replace(' ', '', ucwords($menu_arrayS[$i][$j]["menuname"]));
+												echo '<li class="nav-item" id="menu-' . $menu_id . '"><a href="' . $url_s . '" class="nav-link" data-key="t-level-3.1">
+															' . $menu_arrayS[$i][$j]["menuname"] . ' ' . $attchChild . '</a></li>';
+											} else {
+
+												echo '<li class="nav-item">
+																<a href="#sidebarCrm_' . $j . '" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" 
+															aria-controls="sidebarCrm" data-key="t-level-2.1">' . $menu_arrayS[$i][$j]["menuname"] . ' ' . $attchChild . ' </a>
+															<div class="menu-dropdown collapse" id="sidebarCrm_' . $j . '">
+																<ul class="nav nav-sm flex-column">';
+												$attchSon = '';
+												if (count($menu_arraySC) > 0) {
+													for ($k = 0; $k <= sizeof($menu_arraySC); $k++) {
+														if (isset($menu_arraySC[$k]['parentmenuid'])) {
+
+															/*if(isset($menu_arraySC[$k]["newmenutag"]) && $menu_arraySC[$k]["newmenutag"]=="ACTIVE"){
+																				
+																		}else{
+																			$attchSon='';
+																		}*/
+															$attchSon = '<span class="badge bg-soft-success text-success mt-1 float-end">New</span>&nbsp;&nbsp;&nbsp;';
+															if (!in_array($menu_arraySC[$k]["pk_id"], $menu_new_tag)) {
+																$attchSon = '';
+															}
+
+															if ($menu_arrayS[$i][$j]['pk_id'] == $menu_arraySC[$k]['parentmenuid']) {
+
+																$mids["mid"] = $menu_arraySC[$k]["pk_id"];
+																if ($menu_arraySC[$k]["controller"] != '' && $menu_arraySC[$k]["actionfunction"] != '') {
+																	$url_para_s = $menu_arraySC[$k]['controller'] . '/' . $menu_arraySC[$k]['actionfunction'];
+																	if ($menu_arraySC[$k]["urlstring"] != '')
+																		$url_para_s .= '/' . $menu_arraySC[$k]["urlstring"];
+																	$url_s = site_url($url_para_s);
+																} else
+																	$url_s = '#';
+
+																$menu_sub_id = str_replace(' ', '', ucwords($menu_arraySC[$k]["menuname"]));
+																echo '<li class="nav-item" id="menu-' . $menu_sub_id . '"><a  href="' . $url_s . '" class="nav-link" data-key="t-level-3.1">' . $menu_arraySC[$k]["menuname"] . ' ' . $attchSon . '</a></li>';
+															}
+														}
+													}
+												}
+												echo '</ul>
+															</div>
+															</li>
+														';
+											}
+										}
+									}
+								}
+								echo			'</ul>
+											</div>
+										</li>';
+							}
+						}
+
+						?>
+
+					</ul> {% endcomment %}
+				</div>
+
+
+				<!-- Sidebar -->
+			</div>
+
+			<div class="sidebar-background"></div>
+		</div>
+		<!-- Left Sidebar End -->
+		<!-- Vertical Overlay-->
+		<div class="vertical-overlay"></div>
+
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ==================== index php ========================================== -->
