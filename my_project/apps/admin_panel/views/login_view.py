@@ -19,7 +19,7 @@ PASSWORD = "12345"
 def generate_jwt_token(username):
     payload = {
         "username": username,
-       "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=30),  # Expiry time
+       "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=60),  # Expiry time
         "iat": datetime.datetime.now(datetime.timezone.utc)  # Issued at
     }
     token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
@@ -42,7 +42,7 @@ def login_view(request):
         # if details  and username == details['user_name'] and check_password(password, details['password'] ): #for hashed password
         # if details and username == details['user_name'] and password == details['password']:
         if user:
-            token = generate_jwt_token(username)  # Generate JWT token
+            token = generate_jwt_token(user['user_name'])  # Generate JWT token
             response = redirect("dashboard")  # Redirect to dashboard
             response.set_cookie("jwt_token", token, httponly=True, samesite="Lax")  # Store token in cookie
             response.set_cookie("username", user['user_name'], max_age=3600)
